@@ -1,0 +1,115 @@
+{
+  "package_version": 2,
+  "version": "3.6.2",
+  "name": "cocos-sample-test",
+  "description": "i18n:simple-1677826733050.description",
+  "main": "./dist/main.js",
+  "panels": {
+    "mainPanel": {
+      "title": "i18n:cocos-sample-test.title",
+      "main": "./panel/panel.js"
+    }
+  },
+  "contributions": {
+    "menu": [
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.title",
+        "message": "openAdPopup"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.firstTitle",
+        "message": "placeHolder-API"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.secondTitle",
+        "message": "mittskolvalAPI"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.initTitle",
+        "message": "init-API"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.requestAdsTitle",
+        "message": "requestAds-API"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.rejectunauthTitle",
+        "message": "rejectUnauth-API"
+      },
+      {
+        "path": "i18n:menu.extension",
+        "label": "i18n:cocos-sample-test.unsetrejectunauthTitle",
+        "message": "unsetrejectUnauth-API"
+      }
+    ],
+    "messages": {
+      "openAdPopup": {
+        "public": true,
+        "methods": [
+          "openAdPopup"
+        ]
+      },
+      "placeHolder-API": {
+        "public": true,
+        "methods": [
+          "placeHolderAPI"
+        ]
+      },
+      "mittskolvalAPI": {
+        "public": true,
+        "methods": [
+          "mittskolvalAPI"
+        ]
+      },
+      "init-API": {
+        "public": true,
+        "methods": [
+          "initAPI"
+        ]
+      },
+      "requestAds-API": {
+        "public": true,
+        "methods": [
+          "requestAdsAPI"
+        ]
+      },
+      "rejectUnauth-API": {
+        "public": true,
+        "methods": [
+          "rejectunauthAPI"
+        ]
+      },
+      "unsetrejectUnauth-API": {
+        "public": true,
+        "methods": [
+          "unsetrejectunauthAPI"
+        ]
+      }
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^16.0.1",
+    "typescript": "^4.3.4"
+  },
+  "author": "Cocos Creator",
+  "editor": ">=3.6.2",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "dependencies": {
+    "@appylar/cocos-sdk": "^0.0.1",
+    "appylar-sdk": "^1.0.1",
+    "packagefortesting": "^1.0.78"
+  },
+  "creator": {
+    "version": "3.6.2"
+  },
+  "uuid": "4b657fce-a369-4d95-a542-4e06c0246179"
+}

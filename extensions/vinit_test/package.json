@@ -1,0 +1,40 @@
+{
+  "package_version": 2,
+  "version": "3.6.2",
+  "name": "appylar",
+  "description": "i18n:appylar.description",
+  "main": "./dist/main.js",
+  "devDependencies": {
+    "@types/node": "^16.0.1",
+    "typescript": "^4.3.4"
+  },
+  "author": "Cocos Creator",
+  "editor": ">=3.6.2",
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "tsc -w"
+  },
+  "contributions": {
+    "scene": {
+      "script": "./dist/scene.js"
+    },
+    "menu": [
+      {
+        "path": "Appylar Extension",
+        "label": "Show Ad",
+        "message": "log"
+      }
+    ],
+    "messages": {
+      "log": {
+        "methods": [
+          "log"
+        ]
+      }
+    }
+  },
+  "creator": {
+    "version": "3.6.2"
+  },
+  "uuid": "d00a3cf6-c5a3-40c6-92e0-e8849e92f5c4"
+}

@@ -1,0 +1,14 @@
+{
+  "name": "applyar-demo",
+  "uuid": "43d237bc-1f78-4c75-8c48-6339a4525a46",
+  "version": "3.6.2",
+  "creator": {
+    "version": "3.6.2"
+  },
+  "dependencies": {
+    "appylar-package-5ex": "^0.0.15"
+  },
+  "devDependencies": {
+    "@types/node": "^18.15.11"
+  }
+}
