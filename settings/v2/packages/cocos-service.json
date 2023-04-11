@@ -1,13 +1,17 @@
 {
   "game": {
-    "name": "UNKNOW GAME",
-    "app_id": "UNKNOW",
-    "c_id": "0"
+    "app_id": "605925273",
+    "c_id": "0",
+    "name": "sample"
   },
   "appConfigMaps": [
     {
       "app_id": "UNKNOW",
       "config_id": "66bc92"
+    },
+    {
+      "app_id": "605925273",
+      "config_id": "2f6de3"
     }
   ],
   "configs": [
@@ -16,7 +20,56 @@
       "config_id": "66bc92",
       "config_name": "Default",
       "config_remarks": "",
-      "services": []
+      "services": [
+        {
+          "service_id": "278",
+          "enable": false,
+          "param": {}
+        }
+      ]
+    },
+    {
+      "app_id": "605925273",
+      "config_id": "2f6de3",
+      "config_name": "Default",
+      "config_remarks": "",
+      "services": [
+        {
+          "service_id": "278",
+          "enable": true,
+          "param": {
+            "configId": "edb662",
+            "plugin_version": "2.0.7_0.2.0"
+          }
+        }
+      ]
+    }
+  ],
+  "sdkHubConfigSet": [
+    {
+      "id": "edb662",
+      "name": "HUAWEI  AppGallery Connect",
+      "platform": "3",
+      "channelID": "161221",
+      "channelName": "HUAWEI  AppGallery Connect",
+      "remarks": "HUAWEI  AppGallery Connect",
+      "plugins": [
+        {
+          "hasParam": false,
+          "pParam": {},
+          "pId": "2412",
+          "pName": "HUAWEI_HMS",
+          "packageName": "huawei-hms",
+          "pType": 30,
+          "pUseType": 30,
+          "hasLocal": true,
+          "hasUpdate": false,
+          "requireParam": true,
+          "pVersion": "2.0.3_6.3.0",
+          "isInstall": false,
+          "installProgress": true
+        }
+      ]
     }
   ]
 }

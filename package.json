@@ -6,6 +6,7 @@
     "version": "3.6.2"
   },
   "dependencies": {
+    "@appylar/cocos-sdk": "^0.0.9",
     "appylar-package-5ex": "^0.0.15"
   },
   "devDependencies": {

@@ -1,4 +1,3 @@
-
 import {
   _decorator,
   Component,
@@ -15,14 +14,17 @@ import {
   Size,
   Sprite,
   ToggleComponent,
+  director,
+  UITransform,
 } from "cc";
+
 const { ccclass, property } = _decorator;
-import { init, showAd, canShowAd } from "appylar-package-5ex";
 
-// Import the NPM package
-//var MyNpmPackage = require("../my-npm-package");
-
-// import MyNpmPackage from "../my-npm-package";
+import { init, canShowAd, showAd, MyCallback } from "@appylar/cocos-sdk";
+// import { log } from "console";
+// import {
+//   MyCallback, init, canShowAd, showAd
+// } from "../cocos-sdk/index";
 
 @ccclass("MyScript")
 export class MyScript extends Component {
@@ -35,13 +37,26 @@ export class MyScript extends Component {
   public landscapeToggle: any = null;
   public topToggle: any = null;
   public bottomToggle: any = null;
-  public topWebview: any = null;
-  public bottomWebview: any = null;
+  public topAd: any = null;
+  public bottomAd: any = null;
   public bannerWidthTxt: any = null;
   public bannerHeightTxt: any = null;
+  webViewNode: any;
+  webView: any;
+
   onLoad() {
-    // Log a message
-    // MyNpmPackage.log("Vinit Hello, world!");
+
+    // Define a callback function
+    const myCallback: MyCallback = (result: string) => {
+      console.log("callback run", result); // Log the result to the console
+    };
+
+    // getResult(myCallback).then((res) => {
+    //   console.log("response myCallback", res);
+    // })
+    //   .catch((error) => {
+    //     console.log("error", error);
+    //   });
 
     this.apiKeyEditbox = this.node
       .getChildByName("apiKeyEditBox")
@@ -63,12 +78,12 @@ export class MyScript extends Component {
       .getChildByName("bannerHeightTxt")
       .getComponent(EditBox);
 
-    this.topWebview = this.node
-      .getChildByName("topWebview")
+    this.topAd = this.node
+      .getChildByName("topAd")
       .getComponent(WebView);
 
-    this.bottomWebview = this.node
-      .getChildByName("bottomWebview")
+    this.bottomAd = this.node
+      .getChildByName("bottomAd")
       .getComponent(WebView);
 
     this.topToggle = this.node
@@ -78,42 +93,16 @@ export class MyScript extends Component {
     this.bottomToggle = this.node
       .getChildByName("bottomToggle")
       .getComponent(ToggleComponent)
-
-    // Create a new node for the web view
-    // var mywebViewNode = this.node; //new Node();
-    // var mywebView = mywebViewNode.addComponent(WebView);
-
-    // Set the URL to load
-    // var url = "https://5exceptions.com/";
-
-
-    // mywebView.url = url;
-
-    // var mywebViewNode = find("mywebViewNode"); // Replace with the name of your node
-    // const webViewComponent = mywebViewNode.getComponent(WebView);
-    // const newWebViewSize = new Size(250, 10); // Replace with the new size you want
-    // webViewComponent.setContentSize(newWebViewSize);
-    // Set the size and position of the web view
-    // mywebViewNode.setScale(9.5, 1, 1);
-    // mywebViewNode.setScale(1, 1);
-
-    //mywebViewNode.setPosition
-
-    // mywebViewNode.setPosition(3.582, 668.478, 0);
-    //mywebViewNode.setPosition(0, 0);
-
-    // Add the web view node to the current node
-    //mywebViewNode.parent = this.node;
-
-    // // Add the web view node to the current node
-    // mywebViewNode.parent = this.node;
-
-    //this.node.addChild(mywebViewNode);
-
-    // console.log("mywebView", mywebView);
   }
 
+
+
   initializationFunction() {
+    // Define a callback function
+    const myCallback: MyCallback = (result: string) => {
+      console.log("callback run IN", result); // Log the result to the console
+    };
+
     const apiKey = this.apiKeyEditbox.getComponent(EditBox).placeholder;
     const apiId = "";
     const width = this.bannerWidthTxt.getComponent(EditBox).placeholder;
@@ -122,9 +111,10 @@ export class MyScript extends Component {
     const orientations: any = ["landscape", "portrait"];
     const country = "IN";
     const language = "en";
-    init(width, density, height, country, language, apiId, apiKey, orientations)
+    init(width, density, height, country, language, apiId, apiKey, orientations, myCallback)
       .then((res) => {
-        this.responseEditBox.string += JSON.stringify({
+        console.log("Moin", myCallback)
+        this.responseEditBox.string += "\n" + JSON.stringify({
           res: res,
         });
       })
@@ -134,60 +124,72 @@ export class MyScript extends Component {
   }
 
   checkIfCanShowAd() {
-    canShowAd("banner")
-      .then((res) => {
-        this.responseEditBox.string += JSON.stringify({
-          res: res,
-        });
-      })
-      .catch((error) => {
-        this.responseEditBox.string += JSON.stringify(error)
+    // Define a callback function
+    const myCallback: MyCallback = (result: string) => {
+      console.log("callback run IN", result); // Log the result to the console
+    };
+    const tempStatus = canShowAd("banner", myCallback);
+    console.log("Moin", myCallback)
+
+    if (tempStatus) {
+      this.responseEditBox.string += "\n" + JSON.stringify({
+        res: tempStatus,
       });
+    } else {
+      this.responseEditBox.string += "\n" + JSON.stringify({
+        res: tempStatus,
+      });
+    }
   }
 
   showOneAd() {
+    const myCallback: MyCallback = (result: string) => {
+      console.log("callback run IN", result); // Log the result to the console
+    };
     if (this.topToggle.isChecked) {
-    showAd("banner")
-      .then((res) => {
-        this.responseEditBox.string += JSON.stringify({
-          res: JSON.stringify(res),
+      showAd("banner", myCallback)
+        .then((res) => {
+          this.responseEditBox.string += "\n" + JSON.stringify({
+            res: JSON.stringify(res),
+          });
+
+          let node = this.node
+            .getChildByName("topAd");
+          var myWebView = node.addComponent(WebView);
+          var url = res.url;
+          console.log('top called')
+          myWebView.url = url;
+          const uiTransform = myWebView.getComponent(UITransform);
+          uiTransform.setContentSize(900, 200);
+          uiTransform.setAnchorPoint(0.5, 0.5);
+        })
+        .catch((error) => {
+          this.responseEditBox.string += JSON.stringify(error)
         });
-        this.topWebview.url = res.url;
-      })
-      .catch((error) => {
-        this.responseEditBox.string += JSON.stringify(error)
-      });
     }
     if (this.bottomToggle.isChecked) {
-    showAd("banner")
-      .then((res) => {
-        this.responseEditBox.string += JSON.stringify({
-          res: JSON.stringify(res),
+      showAd("banner", myCallback)
+        .then((res) => {
+          this.responseEditBox.string += JSON.stringify({
+            res: JSON.stringify(res),
+          });
+
+          let node = this.node
+            .getChildByName("bottomAd");
+
+          var myWebView = node.addComponent(WebView);
+          var url = res.url;
+          console.log('bottom called')
+          myWebView.url = url;
+          const uiTransform = myWebView.getComponent(UITransform);
+          uiTransform.setContentSize(900, 200);
+          uiTransform.setAnchorPoint(0.5, 0.5);
+        })
+        .catch((error) => {
+          this.responseEditBox.string += JSON.stringify(error)
         });
-        this.bottomWebview.url = res.url;
-      })
-      .catch((error) => {
-        this.responseEditBox.string += JSON.stringify(error)
-      });
     }
   }
-
-
-  // showOneAdBottom() {
-  //   showAd("banner")
-  //     .then((res) => {
-  //       this.responseEditBox.string = {
-  //         res: JSON.stringify(res),
-  //       };
-  //       this.bottomWebview.url = res.url;
-  //       console.log(res);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }
-
-
   start() { }
   update(deltaTime: number) { }
 }
