@@ -47,9 +47,9 @@ export class MyScript extends Component {
   onLoad() {
 
     // Define a callback function
-    const myCallback: MyCallback = (result: string) => {
-      console.log("callback run", result); // Log the result to the console
-    };
+    // const myCallback: MyCallback = (result: string) => {
+    //   console.log("callback run", result); // Log the result to the console
+    // };
 
     // getResult(myCallback).then((res) => {
     //   console.log("response myCallback", res);
@@ -126,7 +126,7 @@ export class MyScript extends Component {
   checkIfCanShowAd() {
     // Define a callback function
     const myCallback: MyCallback = (result: string) => {
-      console.log("callback run IN", result); // Log the result to the console
+      console.log("callback run INin", result); // Log the result to the console
     };
     const tempStatus = canShowAd("banner", myCallback);
     console.log("Moin", myCallback)
@@ -157,7 +157,8 @@ export class MyScript extends Component {
             .getChildByName("topAd");
           var myWebView = node.addComponent(WebView);
           var url = res.url;
-          console.log('top called')
+          console.log('top banner called')
+          console.log("SHOW AD RES")
           myWebView.url = url;
           const uiTransform = myWebView.getComponent(UITransform);
           uiTransform.setContentSize(900, 200);

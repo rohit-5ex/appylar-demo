@@ -49,11 +49,13 @@ export class DynamiCWebView extends Component {
                     var url = res.url;
                     // var url = "https://5exceptions.com/"
                     console.log('top called')
+                    console.log("RES DATA", res)
                     myWebView.url = url;
                     const uiTransform = myWebView.getComponent(UITransform);
                     uiTransform.setContentSize(900, 200);
                     uiTransform.setAnchorPoint(0.5, 0.5);
                 })
+                
                 .catch((error) => {
                     this.responseEditBox.string += JSON.stringify(error)
                 });
